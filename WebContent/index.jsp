@@ -44,7 +44,7 @@
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
 			    <li><a href="#home" class="smoothScroll">HOME</a></li>
-				<li><a href="AddFoodServlet" class="smoothScroll">FOOD GALLERY</a></li>
+				<li><a href="AddFoodServlet?user=<%=user%>" class="smoothScroll">FOOD GALLERY</a></li>
 				<li><a href="#menu" class="smoothScroll">SPECIAL MENU</a></li>
 				<li><a href="#contact" class="smoothScroll">CONTACT</a></li>
 			<%
@@ -52,7 +52,7 @@
 			{
 				
 		    %>
-		    <li><a href="#" class="smoothScroll">SHOW-CART</a></li>
+		    <li><a href="AddCartServlet?method=show&user=<%=user%>" class="smoothScroll">SHOW-CART</a></li>
 		    <li><a href="RegisterCustomerServlet?user=<%=user%>" class="smoothScroll">UPDATE PROFILE</a></li>
 		    <li><a href="#" class="smoothScroll">DELETE ACCOUNT</a></li>
 		    <li><a href="#" class="smoothScroll">SHOW MY ORDERS</a></li>

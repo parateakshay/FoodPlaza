@@ -1,3 +1,4 @@
+<%@page import="com.foodpla.pojo.Cart"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -39,18 +40,25 @@ function validation()
 </script>
 </head>
 <body>
+
+<%
+String user = (String)session.getAttribute("user");
+long foodid = (long)session.getAttribute("foodid");
+
+%>
+
 <div>
-<form onsubmit = "return validation()" action =  "AddCartServlet" method = "get">
+<form onsubmit = "return validation()" action =  "AddCartServlet" method = "post">
 <table>
 <caption>Add to Cart</caption>
 <tr>
 <td>Email Id</td>
-<td><input type = "email" id = "lol1" name = "eid"></td>
+<td><input type = "email" id = "lol1" name = "eid" value = "<%=user%>" readonly="readonly"></td>
 <td><span style="color:red" id = "rofl1" ></span></td>
 </tr>
 <tr>
 <td>Food Id</td>
-<td><input type = "number" id = "lol2" name = "fid"></td>
+<td><input type = "number" id = "lol2" name = "fid" value = "<%=foodid%>"></td>
 <td><span style="color:red" id = "rofl2" ></span></td>
 </tr>
 <tr>
@@ -70,6 +78,10 @@ function validation()
 </tr>
 </table>
 </form>
+
+
+<a href = "AddCartServlet?method=show&user=<%=user%>">Show Cart</a>
+
 </div>
 </body>
 </html>

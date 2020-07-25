@@ -44,7 +44,9 @@ Iterator<Food> i = lf.iterator();
 <%
 while(i.hasNext())
 {
+	
  f = i.next();	
+ long foodid = f.getFoodid();
 %>
 <tr>
 
@@ -54,7 +56,7 @@ while(i.hasNext())
 <td><%=f.getDescription() %></td>
 <td><%=f.getPrice() %></td>
 <% if(admin ==null && user!=null){ %>
-<td><a href = "#">ADD-TO-CART</a></td>
+<td><a href = "AddCartServlet?user=<%=user%>&foodid=<%=foodid%>&method=add">ADD-TO-CART</a></td>
 <%} if(admin !=null && user == null){ %>
 <td><a href = "AddFoodServlet?method=edit&id=<%=f.getFoodid()%>">Edit</a></td>
 <td><a href = "AddFoodServlet?method=delete&id=<%=f.getFoodid()%>">Delete</a></td>

@@ -88,6 +88,9 @@ s.printStackTrace();
 return false;
 }
 
+
+
+
 public ArrayList<Cart> ShowAllCart() 
 {
 	Connection cn = DBUtility.getconnection();
@@ -116,6 +119,37 @@ public ArrayList<Cart> ShowAllCart()
 		s.printStackTrace();
 		
 	}
+	return l;
+}
+
+
+@Override
+public ArrayList<Cart> Showcart(String email_id) 
+{
+Connection cn = DBUtility.getconnection();
+ArrayList<Cart> l = new ArrayList<Cart>();
+String query = "select foodid ,foodname,addons,quantity,totalprice from Cart where email_id = ?";
+Cart c = null;
+try
+{
+PreparedStatement prp = cn.prepareStatement(query);
+prp.setString(1,email_id);
+ResultSet r = prp.executeQuery();
+while(r.next())
+{
+	c = new Cart();
+	 c.setFoodname(r.getString(2));
+	 c.setAddons(r.getString(3));
+	 c.setQuantity(r.getInt(4));
+	 c.setTotalprice(r.getInt(5));
+	 c.setFoodid(r.getInt(1));
+	 l.add(c);
+}
+}
+catch(SQLException s)
+{
+s.printStackTrace();	
+}
 	return l;
 }
 

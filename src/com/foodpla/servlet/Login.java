@@ -23,14 +23,16 @@ public class Login extends HttpServlet
 protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
 {
 	String email = req.getParameter("email");
+	
 	c = cdi.ShowProfile(email);
 HttpSession session = req.getSession();
-    if(c!=null)
-    {
+    session.setAttribute("emailid",email);
+	if(c!=null)
+    	{
     	
-    	session.setAttribute("userdata", c);
-    	resp.sendRedirect("ChangePassword.jsp");
-    }
+    		session.setAttribute("userdata", c);
+    		resp.sendRedirect("ChangePassword.jsp");
+    	}
     	
 
 }	

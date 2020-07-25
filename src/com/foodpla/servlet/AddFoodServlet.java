@@ -26,6 +26,7 @@ public class AddFoodServlet extends HttpServlet {
 	{
 		
 		String act = req.getParameter("method");
+//		String user = req.getParameter("user");
 		HttpSession session = req.getSession();
 		if(act != null && act.equals("edit"))
 		{
@@ -91,7 +92,7 @@ public class AddFoodServlet extends HttpServlet {
 			}
 			
 			else {
-				resp.sendRedirect("AddFood.jsp");
+				resp.sendRedirect("fail.jsp");
 				System.out.println("fail");
 			}
 
@@ -120,7 +121,7 @@ public class AddFoodServlet extends HttpServlet {
 			} 
 			
 			else {
-				resp.sendRedirect("AddFood.jsp");
+				resp.sendRedirect("fail.jsp");
 				System.out.println("fail");
 			}
 		}

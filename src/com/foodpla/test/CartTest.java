@@ -11,9 +11,10 @@ public static void main(String args[])
 	Cart ct = new Cart();
 	CartImpl cil = new CartImpl();
 	Scanner sc = new Scanner(System.in);
+	ArrayList<Cart>l = new ArrayList<Cart>();
 	while(true)
 	{
-System.out.println("1)add cart\n2)delete cart\n3)show all acrt\n");
+System.out.println("1)add cart\n2)delete cart\n3)show all acrt\n4)show cart");
 System.out.println("Enter choice\n");
 int choice = sc.nextInt();
 switch(choice)
@@ -53,7 +54,7 @@ System.out.println("try again");
 }
 break;
 case 3:
-	ArrayList<Cart>l = new ArrayList<Cart>();
+	
 	l = cil.ShowAllCart();
 	if(l==null)
 	{
@@ -69,6 +70,21 @@ case 3:
 		
 	}
 	break;
+case 4:
+	System.out.println("Enter emailid");
+	String cmail = sc.next();
+	l = cil.Showcart(cmail);
+	if(l==null)
+	{
+	System.out.println("no data avilable");	
+	}
+	else
+	{
+		for(Cart m:l)
+		{
+			System.out.println(m);
+		}
+	}
 
 }
 	
