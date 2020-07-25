@@ -52,11 +52,11 @@
 			{
 				
 		    %>
-		    <li><a href="#" class="smoothScroll">ShowCart</a></li>
-		    <li><a href="RegisterCustomerServlet?user=<%=user%>" class="smoothScroll">Update Profile</a></li>
-		    <li><a href="#" class="smoothScroll">Delete Account</a></li>
-		    <li><a href="#" class="smoothScroll">Show My Orders</a></li>
-		   	<li><a href="ChangePassword.jsp" class="smoothScroll">Change Password</a></li>
+		    <li><a href="#" class="smoothScroll">SHOW-CART</a></li>
+		    <li><a href="RegisterCustomerServlet?user=<%=user%>" class="smoothScroll">UPDATE PROFILE</a></li>
+		    <li><a href="#" class="smoothScroll">DELETE ACCOUNT</a></li>
+		    <li><a href="#" class="smoothScroll">SHOW MY ORDERS</a></li>
+		   	<li><a href="ChangePassword.jsp" class="smoothScroll">CHANGE PASSWORD</a></li>
 		    
 		    <%
 			}
@@ -65,10 +65,10 @@
 				
 			%>
 			
-			<li><a href="AddFood.jsp" class="smoothScroll">Add Food</a></li>
-			<li><a href="#team" class="smoothScroll">Show All Orders</a></li>
-			<li><a href="#team" class="smoothScroll">Show All Customers</a></li>
-			<li><a href="ChangePassword.jsp" class="smoothScroll">Change Password</a></li>
+			<li><a href="AddFood.jsp" class="smoothScroll">ADD FOOD</a></li>
+			<li><a href="#team" class="smoothScroll">SHOW ALL ORDERS</a></li>
+			<li><a href="#team" class="smoothScroll">SHOW ALL CUSTOMERS</a></li>
+			<li><a href="ChangePassword.jsp" class="smoothScroll">CHANGE PASSWORD</a></li>
 			
 			<%	
 			}
@@ -77,8 +77,8 @@
 				
 			%>
 			
-			<li><a href="Login.jsp" class="smoothScroll">Login</a></li>
-			<li><a href="RegisterCustomer.jsp" class="smoothScroll">Register</a></li>
+			<li><a href="Login.jsp" class="smoothScroll">LOGIN</a></li>
+			<li><a href="RegisterCustomer.jsp" class="smoothScroll">REGISTER</a></li>
 			
 			<%	
 			}

@@ -8,9 +8,9 @@ public class DBUtility
 {
 	public static Connection getconnection()
 	{
-String DbPath = "jdbc:mysql://mkorvuw3sl6cu9ms.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/FoodPla";
-String userid  = "hx8lzdfi4z15ho2e";
-String password = "sy2cnrfiky49vibx";
+String DbPath = "jdbc:mysql://localhost:3306/FoodPla?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+String userid  = "root";
+String password = "";
 Connection con = null; 
 try
 {
