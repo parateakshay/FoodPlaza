@@ -23,11 +23,11 @@ public String getAddons() {
 public void setAddons(String addons) {
 	this.addons = addons;
 }
-public int getCustid() {
+public int getCartid() {
 	return cartid;
 }
-public void setCustid(int custid) {
-	this.cartid = custid;
+public void setCartid(int cartid) {
+	this.cartid = cartid;
 }
 public int getQuantity() {
 	return quantity;

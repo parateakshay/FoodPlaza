@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.foodpla.dao.CartImpl;
 import com.foodpla.pojo.Cart;
+import com.foodpla.pojo.Food;
 
 @WebServlet("/AddCartServlet")
 public class AddCartServlet extends HttpServlet
@@ -25,22 +26,68 @@ public class AddCartServlet extends HttpServlet
 
 {
 	String user = req.getParameter("user");
-	long foodid = Long.parseLong(req.getParameter("foodid"));
+	
 	String method = req.getParameter("method");
 	HttpSession session = req.getSession();
 	
-		if (method.equals("add"))
+		if (method!=null && method.equals("add"))
 		{
+			int foodid = Integer.parseInt(req.getParameter("foodid"));
 		session.setAttribute("user",user);
 		session.setAttribute("foodid",foodid);
 		resp.sendRedirect("AddCart.jsp");
 		}
-		else if(method.equals("show"))
+		else if(method!=null && method.equals("show"))
 		{
-			List<Cart> c = cdi.Showcart(user);
-			session.setAttribute("cart",c);
+			List<Cart> cl = cdi.Showcart(user);
+			session.setAttribute("cart",cl);
 			resp.sendRedirect("CartList.jsp");
 		}
+		
+		else if(method!=null && method.equals("delete"))
+		{
+			int cartid = Integer.parseInt(req.getParameter("cartid"));
+			boolean flag = cdi.DeleteCart(cartid);
+			System.out.println(flag);
+			if(flag)
+			{
+				List<Cart> cl = cdi.Showcart(user);
+				session.setAttribute("cart",cl);
+				
+				resp.sendRedirect("Success.jsp");
+			}
+			else
+			{
+				resp.sendRedirect("fail.jsp");
+				
+			}
+			
+			
+		}
+		
+		
+		else if(method!=null && method.equals("clear"))
+		{
+			user = req.getParameter("user");
+			boolean flag = cdi.ClearCart(user);
+			System.out.println(flag);
+			
+			if(flag)
+			{
+				
+			resp.sendRedirect("Success.jsp");	
+			}
+			else
+			{
+				resp.sendRedirect("fail.jsp");
+				
+			}
+			
+		
+		}
+		
+		
+		
 		else {
 			
 			resp.sendRedirect("fail.jsp");

@@ -8,21 +8,23 @@ public class DBUtility
 {
 	public static Connection getconnection()
 	{
-String DbPath = "jdbc:mysql://localhost:3306/FoodPla?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+String DbPath = "jdbc:mysql://foodpla.cv6grydqt3lu.us-east-1.rds.amazonaws.com:3306/foodpla";
 String userid  = "root";
-String password = "";
+String password = "12345678";
 Connection con = null; 
 try
 {
 Class.forName("com.mysql.cj.jdbc.Driver");
-con= DriverManager.getConnection(DbPath,userid,password);
+con= DriverManager.getConnection(DbPath,userid,"12345678");
 }
 catch(ClassNotFoundException c)
 {
+	System.out.println("where is my driver");
 	c.printStackTrace();
 }
 catch(SQLException s)
 {
+	System.out.println("why is my driver");
 s.printStackTrace();	
 }
 return con;

@@ -62,7 +62,7 @@ public class CartImpl implements CartDao
 	}
 
 
-public boolean DeleteCart(String email_id) 
+public boolean ClearCart(String email_id) 
 {
 Connection cn = DBUtility.getconnection();
 String query = "delete from Cart where email_id = ?";
@@ -107,7 +107,7 @@ public ArrayList<Cart> ShowAllCart()
 		c.setEmail_id(r.getString(1));
 		 c.setFoodname(r.getString(2));
 		 c.setAddons(r.getString(3));
-		 c.setCustid(r.getInt(4));
+		 c.setCartid(r.getInt(4));
 		 c.setQuantity(r.getInt(5));
 		 c.setTotalprice(r.getInt(6));
 		 c.setFoodid(r.getInt(7));
@@ -128,7 +128,7 @@ public ArrayList<Cart> Showcart(String email_id)
 {
 Connection cn = DBUtility.getconnection();
 ArrayList<Cart> l = new ArrayList<Cart>();
-String query = "select foodid ,foodname,addons,quantity,totalprice from Cart where email_id = ?";
+String query = "select foodid ,foodname,addons,quantity,totalprice,cartid,email_id from Cart where email_id = ?";
 Cart c = null;
 try
 {
@@ -142,7 +142,9 @@ while(r.next())
 	 c.setAddons(r.getString(3));
 	 c.setQuantity(r.getInt(4));
 	 c.setTotalprice(r.getInt(5));
+	 c.setCartid(r.getInt(6));
 	 c.setFoodid(r.getInt(1));
+	 c.setEmail_id(r.getString(7));
 	 l.add(c);
 }
 }
@@ -154,7 +156,35 @@ s.printStackTrace();
 }
 
 
+@Override
+public boolean DeleteCart(int cartid) 
+{
+	
+	Connection cn = DBUtility.getconnection();
+	String query = "delete from Cart where cartid = ?";
+	try
+	{
+	PreparedStatement prp = cn.prepareStatement(query);
+	prp.setInt(1,cartid);
+	int flag = prp.executeUpdate();
+	if(flag>0)
+	{
+	return true;	
+	}
+	else
+	{
+	return false;	
+	}
+	}
+	catch(SQLException s)
+	{
+	s.printStackTrace();	
+	}
 
+	return false;
+	}
 
-
+	
+	
 }
+

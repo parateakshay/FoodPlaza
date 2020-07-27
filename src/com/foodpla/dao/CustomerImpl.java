@@ -88,7 +88,7 @@ try
 PreparedStatement prp = cn.prepareStatement(query);
 prp.setString(1, email_id);
 int f = prp.executeUpdate();
-if(f>1)
+if(f>0)
 {
 return true;
 }

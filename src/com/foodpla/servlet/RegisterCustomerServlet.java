@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.foodpla.dao.CartImpl;
 import com.foodpla.dao.CustomerImpl;
 import com.foodpla.pojo.Customer;
 
@@ -21,6 +22,7 @@ public class RegisterCustomerServlet extends HttpServlet
 {
 	 CustomerImpl cdi = new CustomerImpl();
 	 Customer c = new Customer();
+	 CartImpl ci = new CartImpl();
 @Override
 
    
@@ -28,24 +30,44 @@ public class RegisterCustomerServlet extends HttpServlet
     {
 	
 	String cemail = req.getParameter("user");
-	c = cdi.ShowProfile(cemail);
+	
+	String act = req.getParameter("method");
 	System.out.println(c);
 //	HttpSession session = req.getSession();
 	
-	if (c!=null)
+	if(act!=null && act.equals("update"))
 	{
-		
-//		session.setAttribute("userdata", c);
-//		resp.sendRedirect("UpdateCustomer.jsp");
-		req.setAttribute("userdata", c);
-		RequestDispatcher rd= req.getRequestDispatcher("UpdateCustomer.jsp");
-		rd.forward(req, resp);
-		
+	c = cdi.ShowProfile(cemail);
+		if (c!=null)
+		{
+			req.setAttribute("userdata", c);
+			RequestDispatcher rd= req.getRequestDispatcher("UpdateCustomer.jsp");
+			rd.forward(req, resp);
+		}
+		else 
+		{
+			
+			resp.sendRedirect("fail.jsp");
+		}
 	}
+	else if(act!=null && act.equals("delete"))
+	{
+		boolean pp = cdi.DeleteCustomer(cemail);
+		System.out.println(pp);
+		boolean oo = ci.ClearCart(cemail);
+		if(oo && pp)
+		{
+			
+			HttpSession session = req.getSession();
+			session.invalidate();
+			resp.sendRedirect("index.jsp");
+		}
+		else 
+		{
+			resp.sendRedirect("fail.jsp");	
+			
+		}
 		
-	else {
-		
-		resp.sendRedirect("fail.jsp");
 	}
 	}
 
