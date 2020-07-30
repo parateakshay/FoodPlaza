@@ -90,6 +90,12 @@ td{
 </style>
 <body>
 
+<% 
+String user = (String)session.getAttribute("user");
+String admin = (String)session.getAttribute("admin");
+
+
+List<Food> lf = (List<Food>)session.getAttribute("foodList");%>
 
 
 <section class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -104,16 +110,47 @@ td{
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
-			    <li><a href="#home" class="smoothScroll">HOME</a></li>
-				<li><a href="FileList.jsp" class="smoothScroll">FOOD GALLERY</a></li>
+			   <li><a href="AddFoodServlet?user=<%=user%>" class="smoothScroll">FOOD GALLERY</a></li>
 				<li><a href="#menu" class="smoothScroll">SPECIAL MENU</a></li>
-				<li><a href="#contact" class="smoothScroll">CONTACT</a></li>
-		    <li><a href="CartList.jsp" class="smoothScroll">SHOW-CART</a></li>
-		    <li><a href="UpdateCustomer.jsp" class="smoothScroll">UPDATE PROFILE</a></li>
-		    <li><a href="#" class="smoothScroll">DELETE ACCOUNT</a></li>
-		    <li><a href="#" class="smoothScroll">SHOW MY ORDERS</a></li>
+			<%
+			if(admin== null && user != null)
+			{
+				
+		    %>
+		    <li><a href="AddCartServlet?method=show&user=<%=user%>" class="smoothScroll">SHOW-CART</a></li>
+		    <li><a href="RegisterCustomerServlet?method=update&user=<%=user%>" class="smoothScroll">UPDATE PROFILE</a></li>
+		    <li><a href="RegisterCustomerServlet?method=delete&user=<%=user%>" class="smoothScroll">DELETE ACCOUNT</a></li>
+		    <li><a href="OrderServlet?method=add&user=<%=user%>" class="smoothScroll">SHOW MY ORDERS</a></li>
 		   	<li><a href="ChangePassword.jsp" class="smoothScroll">CHANGE PASSWORD</a></li>
-
+			<li><a href="LogoutServlet?user=<%=user%>" class="smoothScroll">LOGOUT</a></li>
+					   	
+		    
+		    <%
+			}
+			if(admin != null && user ==null)
+			{
+				
+			%>
+			
+			<li><a href="AddFood.jsp" class="smoothScroll">ADD FOOD</a></li>
+			<li><a href="OrderServlet?method=showallorder" class="smoothScroll">SHOW ALL ORDERS</a></li>
+			<li><a href="RegisterCustomerServlet?method=showallcustomer" class="smoothScroll">SHOW ALL CUSTOMERS</a></li>
+			<li><a href="ChangePassword.jsp" class="smoothScroll">CHANGE PASSWORD</a></li>
+			<li><a href="LogoutServlet?user=<%=admin%>" class="smoothScroll">LOGOUT</a></li>
+			
+			<%	
+			}
+			if(admin==null && user==null)
+			{
+				
+			%>
+			
+			<li><a href="Login.jsp" class="smoothScroll">LOGIN</a></li>
+			<li><a href="RegisterCustomer.jsp" class="smoothScroll">REGISTER</a></li>
+			
+			<%	
+			}
+			%>
 			</ul>
 		</div>
 	</div>
@@ -128,12 +165,7 @@ td{
 
 
 
-<% 
-String user = (String)session.getAttribute("user");
-String admin = (String)session.getAttribute("admin");
 
-
-List<Food> lf = (List<Food>)session.getAttribute("foodList");%>
 
 <%
 Food f = new Food();
@@ -199,8 +231,14 @@ while(i.hasNext())
 <p>  </p>
 <br>
 <p> </p>
+
+<%
+if (user!=null && admin==null)
+{
+%>
 <div class = "container">
 <button class="btn btn-default" type="submit"><a href = "AddCartServlet?method=show&user=<%=user%>">Show Cart</a></button>
+<%} %>
 </div>
 </div>
 </body>

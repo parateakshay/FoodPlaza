@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.foodpla.pojo.Customer;
 import com.foodpla.pojo.Order21020;
 import com.foodpla.utility.DBUtility;
 
@@ -99,14 +100,15 @@ s.printStackTrace();
 		{
 		Connection cn = DBUtility.getconnection();
 		ArrayList<Order21020> l = new ArrayList<Order21020>();
-		String query = "select bookingdatetime,address,email_id,totalprice,orderid from Order21020";
-		Order21020 o = new Order21020();
+		String query = "select bookingdatetime,address,email_id,ordertotalprice,orderid from Order21020";
+		Order21020 o = null;
 		try
 		{
 			PreparedStatement prp = cn.prepareStatement(query);
 			ResultSet r = prp.executeQuery();
 			while(r.next())
 			{
+				o = new Order21020();
 				o.setBookingdatetime(r.getString(1));
 				o.setAddress(r.getString(2));
 				o.setEmail_id(r.getString(3));
@@ -128,9 +130,9 @@ s.printStackTrace();
 	{
 		Connection cn = DBUtility.getconnection();
 		ArrayList<Order21020> l = new ArrayList<Order21020>();
-		String query = "select bookingdatetime,address,email_id,totalprice,orderid from Order21020 where email_id = ?";
+		String query = "select bookingdatetime,address,email_id,ordertotalprice,orderid from Order21020 where email_id = ?";
 		
-		Order21020 o = new Order21020();
+		Order21020 o = null;
 		try
 		{
 			PreparedStatement prp = cn.prepareStatement(query);
@@ -138,6 +140,7 @@ s.printStackTrace();
 			ResultSet r = prp.executeQuery();
 			while(r.next())
 			{
+				o = new Order21020();
 				o.setBookingdatetime(r.getString(1));
 				o.setAddress(r.getString(2));
 				o.setEmail_id(r.getString(3));
@@ -153,5 +156,35 @@ s.printStackTrace();
 		}
 		return l;
 	}
+
+
+	@Override
+	public Order21020 ShowOrder(long orderid) 
+	{
+		Connection cn = DBUtility.getconnection();
+		String query = "select orderid,email_id,address,ordertotalprice from order21020 where orderid = ?";
+		Order21020 o= new Order21020();
+		
+		try
+		{
+		PreparedStatement prp = cn.prepareStatement(query);
+		prp.setLong(1,orderid);
+		ResultSet r = prp.executeQuery();
+		while(r.next())
+		{
+			o.setOrderid(r.getLong(1));
+			o.setEmail_id(r.getString(2));
+			o.setAddress(r.getString(3));
+			o.setTotalprice(r.getInt(4));
+			
+		}
+		}
+		catch(SQLException s)
+		{
+			s.printStackTrace();
+		}
+
+		return o;
+			}
 
 }

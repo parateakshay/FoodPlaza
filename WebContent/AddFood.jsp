@@ -113,7 +113,7 @@
 
     				<div class="form-group">
     				 <div class="col-sm-offset-2 col-sm-10">
-    					 <input type="submit" class="btn btn-default">
+    					 <input type="submit" value = "Add Food" class="btn btn-default">
     						<input id = 'canbut' type="cancel" value="Cancel" class="btn btn-default">
 
     					 <p>  </p>

@@ -87,7 +87,7 @@ public class AddFoodServlet extends HttpServlet {
 			flag = fdi.AddFood(f);
 			
 			if (flag) {
-				resp.sendRedirect("AddFood.jsp");
+				resp.sendRedirect("index.jsp");
 				System.out.println("successfull");
 			}
 			

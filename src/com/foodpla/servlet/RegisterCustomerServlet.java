@@ -3,6 +3,7 @@ package com.foodpla.servlet;
 import java.io.IOException;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -69,6 +70,40 @@ public class RegisterCustomerServlet extends HttpServlet
 		}
 		
 	}
+	else if(act!=null && act.equals("showallcustomer"))
+	{
+		
+		List<Customer> lc = cdi.ShowAllCustomer();
+		
+		HttpSession session = req.getSession();
+		System.out.println("storing");
+		session.setAttribute("showallcust",lc);
+		System.out.println("redirecting");
+		resp.sendRedirect("ShowAllCustomer.jsp");
+		
+		
+		
+	}
+	else if(act!=null && act.equals("showindividual"))
+	{
+		
+	String newcust = req.getParameter("user");
+		
+		
+		c = cdi.ShowProfile(newcust);
+		if (c!=null)
+		{
+			req.setAttribute("userdata", c);
+			RequestDispatcher rd= req.getRequestDispatcher("ShowIndividualCustomer.jsp");
+			rd.forward(req, resp);
+		}
+		else 
+		{
+			
+			resp.sendRedirect("fail.jsp");
+		}
+		
+	}
 	}
 
 protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
@@ -100,7 +135,7 @@ if(flag)
 	  String hello = (String)session.getAttribute("name"); 
 	  pw.println(hello);
 	 
-		 resp.sendRedirect("RegisterCustomer.jsp"); 
+		 resp.sendRedirect("Login.jsp"); 
 System.out.println("successfull");
 
 }

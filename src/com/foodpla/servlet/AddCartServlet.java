@@ -54,7 +54,7 @@ public class AddCartServlet extends HttpServlet
 				List<Cart> cl = cdi.Showcart(user);
 				session.setAttribute("cart",cl);
 				
-				resp.sendRedirect("Success.jsp");
+				resp.sendRedirect("FileList.jsp");
 			}
 			else
 			{
@@ -75,7 +75,7 @@ public class AddCartServlet extends HttpServlet
 			if(flag)
 			{
 				
-			resp.sendRedirect("Success.jsp");	
+			resp.sendRedirect("FileList.jsp");	
 			}
 			else
 			{

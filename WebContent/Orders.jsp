@@ -1,3 +1,4 @@
+<%@page import="com.foodpla.pojo.Order21020"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.foodpla.pojo.Cart"%>
 <%@page import="java.util.List"%>
@@ -7,7 +8,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>CartList</title>
+<title>OrdersList</title>
 </head>
 
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -102,9 +103,10 @@ td{
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
 			
-				<li><a href="FileList.jsp" class="smoothScroll">FOOD GALLERY</a></li>
+				<li><a href="index.jsp" class="smoothScroll">FOOD GALLERY</a></li>
 				<li><a href="index.jsp" class="smoothScroll">SPECIAL MENU</a></li>
-				</ul>
+						    <li><a href="#" class="smoothScroll">SHOW MY ORDERS</a></li>
+			</ul>
 		</div>
 	</div>
 </section>
@@ -113,26 +115,23 @@ td{
 
 
 <%
-List<Cart> cl = (List<Cart>)session.getAttribute("cart");
-
-Cart c = new Cart();
-Iterator<Cart> i = cl.iterator();
+List<Order21020> lo = (List<Order21020>)session.getAttribute("orderlist");
+Order21020 o = new Order21020();
+Iterator<Order21020> i = lo.iterator();
 
 %>
 <div class= "final">
 <section class = "not">
   <!--for demo wrap-->
-  <h1>Cart</h1>
+  <h1>Orders</h1>
   <div class="tbl-header">
     <table cellpadding="0" cellspacing="0" border="0">
       <thead>
         <tr>
-          <th>Food Id</th>
-			<th>Food Name</th>
-			<th>Food Quantity</th>
-			<th>Add Ons</th>
+          <th>Order Id</th>
+			<th>Booking Date And Time</th>
+			<th>Address</th>
 			<th>TotalPrice</th>
-			<th>Cart Id</th>
 			<th>Action</th>
         </tr>
       </thead>
@@ -143,7 +142,7 @@ Iterator<Cart> i = cl.iterator();
 <%
 while(i.hasNext())
 {
-	c = i.next();
+	o = i.next();
    
 %>
 
@@ -151,13 +150,11 @@ while(i.hasNext())
     <table cellpadding="0" cellspacing="0" border="0">
       <tbody>
         <tr>
-          <td><%=c.getFoodid() %></td>
-          <td><%=c.getFoodname() %></td>
-          <td><%=c.getQuantity()%></td>
-          <td><%=c.getAddons()  %></td>
-          <td><%=c.getTotalprice() %></td>
-          <td><%=c.getCartid()%></td>
-          <td><a href = "AddCartServlet?method=delete&cartid=<%=c.getCartid()%>">Delete</a></td>
+          <td><%=o.getOrderid()%></td>
+          <td><%=o.getBookingdatetime() %></td>
+          <td><%=o.getAddress()%></td>
+          <td><%=o.getTotalprice() %></td>
+         <td><a href = "OrderServlet?method=showindividual&orderid=<%=o.getOrderid()%>">Show</a></td>
 
 </tr>
 <%} %>
@@ -169,21 +166,6 @@ while(i.hasNext())
 <p>  </p>
 <br>
 <p> </p>
-<div class = "container">
-
-
-
-
-<a href = "AddCartServlet?method=clear&user=<%=c.getEmail_id()%>">Clear Cart</a>
-<p> </p>
-<br>
-<p> </p>
-<br>
-<p> </p>
-<br>
-<a href = "OrderServlet?method=add&user=<%=c.getEmail_id()%>">Place Order</a>
-
-</div>
 </div>
 </body>
 </html>

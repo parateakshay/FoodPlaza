@@ -43,10 +43,8 @@
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
-			    <li><a href="#home" class="smoothScroll">HOME</a></li>
 				<li><a href="AddFoodServlet?user=<%=user%>" class="smoothScroll">FOOD GALLERY</a></li>
 				<li><a href="#menu" class="smoothScroll">SPECIAL MENU</a></li>
-				<li><a href="#contact" class="smoothScroll">CONTACT</a></li>
 			<%
 			if(admin== null && user != null)
 			{
@@ -55,8 +53,10 @@
 		    <li><a href="AddCartServlet?method=show&user=<%=user%>" class="smoothScroll">SHOW-CART</a></li>
 		    <li><a href="RegisterCustomerServlet?method=update&user=<%=user%>" class="smoothScroll">UPDATE PROFILE</a></li>
 		    <li><a href="RegisterCustomerServlet?method=delete&user=<%=user%>" class="smoothScroll">DELETE ACCOUNT</a></li>
-		    <li><a href="#" class="smoothScroll">SHOW MY ORDERS</a></li>
+		    <li><a href="OrderServlet?method=add&user=<%=user%>" class="smoothScroll">SHOW MY ORDERS</a></li>
 		   	<li><a href="ChangePassword.jsp" class="smoothScroll">CHANGE PASSWORD</a></li>
+			<li><a href="LogoutServlet?user=<%=user%>" class="smoothScroll">LOGOUT</a></li>
+					   	
 		    
 		    <%
 			}
@@ -66,9 +66,10 @@
 			%>
 			
 			<li><a href="AddFood.jsp" class="smoothScroll">ADD FOOD</a></li>
-			<li><a href="#team" class="smoothScroll">SHOW ALL ORDERS</a></li>
-			<li><a href="#team" class="smoothScroll">SHOW ALL CUSTOMERS</a></li>
+			<li><a href="OrderServlet?method=showallorder" class="smoothScroll">SHOW ALL ORDERS</a></li>
+			<li><a href="RegisterCustomerServlet?method=showallcustomer" class="smoothScroll">SHOW ALL CUSTOMERS</a></li>
 			<li><a href="ChangePassword.jsp" class="smoothScroll">CHANGE PASSWORD</a></li>
+			<li><a href="LogoutServlet?user=<%=admin%>" class="smoothScroll">LOGOUT</a></li>
 			
 			<%	
 			}

@@ -114,6 +114,7 @@ try
 {
 	PreparedStatement prp = cn.prepareStatement(query);
 ResultSet r = prp.executeQuery();
+
 while(r.next())
 {
 Customer c = new Customer();
